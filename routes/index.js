@@ -6,7 +6,8 @@ var path = require('path'),
     url = require("url"),
     querystring = require("querystring"),
     song = require('../models/song.js'),
-    user = require('../models/user.js');
+    user = require('../models/user.js'),
+    User = require('./UserS.js');
 module.exports = function(app) {
     var query;
     app.get('/', function(req, res) {
@@ -26,7 +27,10 @@ module.exports = function(app) {
         } else {
             query = {userName: userName};
         }
-        song.findSongAll(query, res);
+        Song.findAll(query, function(msg) {
+            res.writeHead(200, {"Content-Type": "text/json"});
+            res.end(JSON.stringify(msg));
+        });
     });
 
     app.post('/addSong', function(req, res) {
@@ -39,16 +43,28 @@ module.exports = function(app) {
         } else {
             query.userName = userName;
         }
-        song.addSong(query, res);
+        Song.save(query, function(msg){
+            res.writeHead(200, {"Content-Type" : "text/json"});
+            res.end(JSON.stringify(msg));
+        });
     });
 
     app.post('/register', function(req, res) {
         query = req.body;
-        user.registerUser(query, res);
+        User.save(query, function(msg){
+            res.writeHead(200, {"Content-Type" : "text/json"});
+            res.end(JSON.stringify(msg));
+        });
     });
 
     app.post('/login', function(req, res) {
         query = req.body;
-        user.loginUser(query, req, res);
+        User.login(query, function(msg) {
+            res.writeHead(200, {"Content-Type": "text/json"});
+            res.end(JSON.stringify(msg));
+            if (msg.status === 'success') {
+                req.session.userName = json.userName;
+            }
+        });
     });
 }
