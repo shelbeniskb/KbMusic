@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="http://libs.useso.com/js/jquery/2.0.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"><!-- 使用图标 http://ionicons.com/ -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/shelbenmusic.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+</head>
+<body>
+    <div class="body_bg">
+        <img src="./images/public_bg_1.png">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="forgap col-md-6 col-lg-6"></div>
+            <div class="navbar col-md-4 col-lg-4" role="navigation"> 
+                <div class="input-group">
+                    <input id="search_input" type="text" class="form-control" placeholder="Song Name">
+                    <div class="input-group-btn">
+                        <button id="search_btn" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div id="user-container" class="col-md-2 col-lg-2">
+                <span class="ion-social-github"></span>
+                <% if(userName === undefined) { %>
+                    <span id='user-name'>登录</span>
+                <% } else {%>
+                    <span id='user-name'><%= userName %></span>
+                <% } %>
+                <span></span>
+            </div>
+        </div>
+
+        <div id="show-container" class="row">
+            <div class="forgap col-md-1 col-lg-1"></div>
+            <div class="stage-container col-md-10 col-lg-10">
+                <div class="show-stage">
+                    <div class="show-container">
+                        <img class="img-card card1" src="./images/gem.jpg">
+                        <img class="img-card card2" src="./images/gem.jpg">
+                        <img class="img-card card3" src="./images/gem.jpg">
+                        <img class="img-card card4" src="./images/gem.jpg">
+                        <img class="img-card card5" src="./images/gem.jpg">
+                        <img class="img-card card6" src="./images/gem.jpg">
+                        <img class="img-card card7" src="./images/gem.jpg">
+                        <img class="img-card card8" src="./images/gem.jpg">
+                        <img class="img-card card9" src="./images/gem.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="forgap col-md-1 col-lg-1"></div>
+        </div>
+
+        <div id="player-container" class="row">
+            <div class="play-content">
+                <button id="play" class="btn btn-defult">
+                    <span id="play-icon" class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </button>
+
+                <button id="like" class="btn btn-defult">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                </button>
+
+                <button id="next" class="btn btn-defult">
+                    <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+                </button>
+
+                <button id="volume" class="btn btn-defult">
+                    <span class="glyphicon glyphicon-volume-up"></span>
+                </button>
+                
+            </div>
+        </div>
+
+
+
+        <audio id="player_default"></audio>        
+
+    </div>
+
+    <div id="slider-page" class="slider-container">
+        <div id="slider-content">
+            <table id="love-song-table" class="table">
+                <colgroup>
+                    <col class="id" span="1"/>
+                    <col class="state" span="1">
+                    <col class="name" span="1"/>
+                    <col class="time" span="1"/>
+                    <col class="artist" span="1"/>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Song</th>
+                        <th>Time</th>
+                        <th>Singer</th>
+                    </tr>
+                </thead>
+                <tbody id="song-row-container">
+                </tbody>
+            </table>
+        </div>
+        <div id="slider-trigger">
+            <div id="slider-ctrl" class="slider-control">
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="user-login-signup" class="stage">
+        <div class="rotate-container">
+            <div id="user-login-part" class="card front">
+                <div class="ion-social-octocat">
+                </div>
+                <form id="login_form" role="form" action="http://chn-kehu:8217/login" method="post">
+                    <div class="form-group">
+                        <label for="UserName">User Name</label>
+                        <input type="text" class="form-control" name="userName_login" placeholder="Enter Nickname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" name="userPwd_login" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                        <input type="checkbox"> Remember Me.
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Sign In</button>
+                </form>
+                <div>Don't have account, <span id="signup-link">Sign up now!</span></div>
+            </div>
+            <div id="user-signup-part" class="card back">
+                <div class="ion-social-github">
+                </div>
+                <form id="register_form" role="form" action="http://chn-kehu:8217/register" method="post">
+                    <div class="form-group">
+                        <label for="Email">Email address</label>
+                        <input type="email" class="form-control" name="userEmail_reg" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="UserName">User Name</label>
+                        <input type="text" class="form-control" name="userName_reg" placeholder="Enter Nickname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" name="userPwd_reg" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="PasswordAgain">Confirm Password</label>
+                        <input type="password" class="form-control" name="userPwdAgain_reg" placeholder="Confirm Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">Sign Up</button>
+                </form>
+                <div>Already have account, <span id="signin-link">Sign in!</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="volume-slider"></div>
+    <div id="overlay" class="overlay"></div>
+
+
+
+</body>
+</html>
