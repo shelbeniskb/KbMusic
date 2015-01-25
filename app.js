@@ -11,7 +11,7 @@ var connect = require('connect');
 var SessionStore = require('session-mongoose')(express);
 var store = new SessionStore({
     url: "mongodb://localhost/session",
-    interval: 120000
+ /*   interval: 120000*/ // expiration check worker run interval in millisec (default: 60000)
 });
 
 var app = express();
@@ -24,11 +24,13 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(express.bodyParser());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
 app.use(express.session({
     secret: 'shelben',
     store: store,
-    cookie: { maxAge: 900000 } // expire session in 15 min or 900 seconds
+    cookie: { maxAge: 9000000 } // expire session in 15 min or 900 seconds
 }));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,5 +43,5 @@ if ('development' == app.get('env')) {
 routes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });

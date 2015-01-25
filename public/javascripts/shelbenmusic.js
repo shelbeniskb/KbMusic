@@ -171,10 +171,49 @@ var host = {
             validateAndSubmit(1);
             return false;
         });
+
+        $('.menu-button').on('click', function(e) {
+            e.preventDefault();
+            $('.circle').toggleClass('open');
+        });
         this.addEventForPlayer();
 
         this.initSongList();
 
+        this.initShareMenu();
+
+    },
+
+    initShareMenu: function() {
+        var items = $('.circle a');
+ 
+        for(var i = 0, l = items.length; i < l; i++) {
+          items[i].style.left = (50 + 35*Math.cos(0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+          items[i].style.top = (50 - 35*Math.sin(0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) + "%";
+        }
+
+        $('#sina').on('click', function() {
+            var shareUrl = "http://service.weibo.com/share/share.php?";
+            var title ='推荐 ' + host.curMusic.artistName + ' 的《' + host.curMusic.songName+ '》 （来自Shelben Musiic @白满川哦）';
+            var pic = host.curMusic.artistImg;
+            shareUrl = shareUrl + '&title=' + title + '&pic=' + pic;
+            window.open(shareUrl, "_blank");
+        });
+
+        $('#douban').on('click', function() {
+            var shareUrl = "http://shuo.douban.com/!service/share?";
+            var title ='推荐 ' + host.curMusic.artistName + ' 的《' + host.curMusic.songName+ '》 （来自Shelben Musiic @白满川哦）';
+            var pic = host.curMusic.artistImg;
+            shareUrl = shareUrl + '&text=' + title + '&image=' + pic;
+            window.open(shareUrl, "_blank");
+        });
+
+        $('#facebook').on('click', function() {
+            var shareUrl = "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            var title ='推荐 ' + host.curMusic.artistName + ' 的《' + host.curMusic.songName+ '》 （来自Shelben Musiic @白满川哦）';
+            var u = host.curMusic.artistImg;
+            window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u),'sharer','toolbar=0,status=0,width=626,height=436', '_blank');
+        });
     },
 
     prepareFirstSong: function() {
@@ -353,6 +392,7 @@ var host = {
             frontImgIdx = this.frontImgIdx,
             imgList = this.imgList;
         imgList[frontImgIdx].attr('src', songInfo.artistImg);
+        imgSongMap[frontImgIdx] = songInfo.artistImg;
     },
 
     updateDirtyImg: function() {
@@ -416,8 +456,9 @@ var host = {
     getStepsForSwitch: function(lastSongIdx, curSongIdx, step) {
         var songsList = this.songsList,
             len = songsList.length,
-            forward = {find: true, dir: -1, step: 1000000},
-            back = {find: true, dir: 1, step: 1000000},
+            infinite = 1000000,
+            forward = {find: true, dir: -1, step: infinite},
+            back = {find: true, dir: 1, step: infinite},
             i = 0;
             if (lastSongIdx === -1 || curSongIdx === -1) {
                 return {find: false};
@@ -441,8 +482,12 @@ var host = {
                 }
                 i++;
             }
+            if (forward.step < infinite || back.step < infinite) {
+               return forward.step < back.step ? forward : back; 
+            }
+
+            return {find: false};
             
-            return forward.step < back.step ? forward : back;
     },
 
     getIdxOfSong: function(songInfo) {
