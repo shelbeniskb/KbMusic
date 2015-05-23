@@ -6,13 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-    <script src="http://libs.useso.com/js/jquery/2.0.2/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css"><!-- 使用图标 http://ionicons.com/ -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="javascripts/shelbenmusic.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css">
+    <script src="javascripts/chainload.js"></script>
 </head>
 <body>
     <div class="body_bg">
@@ -44,15 +41,15 @@
             <div class="stage-container col-md-10 col-lg-10">
                 <div class="show-stage">
                     <div class="show-container">
-                        <img class="img-card card1" src="./images/gem.jpg">
-                        <img class="img-card card2" src="./images/gem.jpg">
-                        <img class="img-card card3" src="./images/gem.jpg">
-                        <img class="img-card card4" src="./images/gem.jpg">
-                        <img class="img-card card5" src="./images/gem.jpg">
-                        <img class="img-card card6" src="./images/gem.jpg">
-                        <img class="img-card card7" src="./images/gem.jpg">
-                        <img class="img-card card8" src="./images/gem.jpg">
-                        <img class="img-card card9" src="./images/gem.jpg">
+                        <img class="img-card card1" src="./images/loading.gif">
+                        <img class="img-card card2" src="./images/loading.gif">
+                        <img class="img-card card3" src="./images/loading.gif">
+                        <img class="img-card card4" src="./images/loading.gif">
+                        <img class="img-card card5" src="./images/loading.gif">
+                        <img class="img-card card6" src="./images/loading.gif">
+                        <img class="img-card card7" src="./images/loading.gif">
+                        <img class="img-card card8" src="./images/loading.gif">
+                        <img class="img-card card9" src="./images/loading.gif">
                     </div>
                 </div>
             </div>
@@ -73,9 +70,9 @@
                     <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
                 </button>
 
-                <button id="volume" class="btn btn-defult">
+<!--                 <button id="volume" class="btn btn-defult">
                     <span class="glyphicon glyphicon-volume-up"></span>
-                </button>
+                </button> -->
                 
             </div>
         </div>
@@ -83,8 +80,8 @@
         <div id="share-container" class="row">
             <nav class="circle-menu">
                 <div class="circle">
-                    <a href="javascript:void(0)" id="sina" class="share-icon ion-social-twitter"></a>
-                    <a href="javascript:void(0)" id="douban" class="share-icon ion-social-github"></a>
+                    <a href="javascript:void(0)" id="sina" class="share-icon ion-social-skype"></a>
+                    <a href="javascript:void(0)" id="douban" class="share-icon ion-social-instagram-outline"></a>
                     <a href="javascript:void(0)" id="facebook" class="share-icon ion-social-facebook"></a>
                     <a href="javascript:void(0)" class="share-icon ion-social-googleplus"></a>
                     <a href="javascript:void(0)" class="share-icon ion-social-snapchat"></a>
@@ -180,7 +177,7 @@
         </div>
     </div>
     
-    <div id="volume-slider"></div>
+    <!-- <div id="volume-slider"></div> -->
     <div id="overlay" class="overlay"></div>
 
 
